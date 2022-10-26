@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+$light_color: #EDEDF0;
+$dark_color: #303841;
+$white_color: #fff;
+$ac_button_color: #EB2A46;
+$secondary_button_color: #438CF3;
+$operation_button_color: #377F79;
+$equal_button_color: #FAD716;
+
+$button_size: 60px;
+$button_border_radius: 12px;
+$button_font_size: 28px;
+
+$buttons_gap: 18px;
+
+@mixin calcSize($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin square($size) {
+    width: $size;
+    height: $size;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+.calc {
+    font-family: 'Orbitron', sans-serif;
+    margin: 50px auto;
+    border-radius: 18px;
+    padding: 20px;
+    @include calcSize(320px, 540px);
+
+    &-light {
+        background: $light_color;
+
+        .btn {
+            &:not(.btn-ac):not(.btn-secondary):not(.btn-operation):not(.btn-equal) {
+                background: $light_color;
+                box-shadow:  6px 6px 13px #d3d3d3, -6px -6px 13px $white_color;
+            }
+        }
+
+        .btn-ac {
+            background: $ac_button_color;
+        }
+
+        .btn-secondary {
+            background: $secondary_button_color;
+        }
+
+        .btn-operation {
+            background: $operation_button_color;
+        }
+
+        .btn-equal {
+            background: $equal_button_color;
+        }
+
+        .btn-ac,
+        .btn-secondary,
+        .btn-operation,
+        .btn-equal {
+            color: $white_color;
+        }
+    }
+
+    &-dark {
+        background: $dark_color;
+        color: $white_color;
+
+        .calc-screen {
+            color: $white_color;
+        }
+    }
+}
+
+.calc-screen {
+    height: 125px;
+    padding: 10px;
+    display: grid;
+    justify-items: end;
+    align-items: end;
+
+    p {
+        text-align: right;
+        margin: 0;
+
+        &#last_operation {
+            font-size: 1.4rem;
+            opacity: 0.6;
+        }
+
+        &#result {
+            font-size: 4rem;
+        }
+    }
+}
+
+.calc-buttons {
+    display: grid;
+    grid-gap: $buttons_gap;
+    justify-items: center;
+    align-items: center;
+    grid-template-areas:
+        'ac plus-minus percent division'
+        'seven eight nine multi'
+        'four five six minus'
+        'one two three plus'
+        'zero zero dot equal';
+    margin-top: 20px;
+}
+
+.btn {
+    @include square($button_size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $button_font_size;
+    line-height: 100%;
+    background-color: #333;
+    cursor: pointer;
+    user-select: none;
+    &:hover,
+    &:active {
+        &:not(.btn-ac):not(.btn-secondary):not(.btn-operation):not(.btn-equal) {
+            background: linear-gradient(145deg, #cacaca, #f0f0f0);
+        }
+    }
+
+    &-square {
+        border-radius: $button_border_radius;
+    }
+
+    &-round {
+        border-radius: $button_size/2;
+    }
+
+    &#zero {
+        grid-area: zero;
+        width: 100%;
+    }
+}
