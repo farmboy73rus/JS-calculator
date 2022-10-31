@@ -35,6 +35,7 @@ html {
     border-radius: 18px;
     padding: 20px;
     @include calcSize(320px, 540px);
+    box-shadow: 6px 6px 13px #d3d3d3, -6px -6px 13px $white_color;
 
     &-light {
         background: $light_color;
